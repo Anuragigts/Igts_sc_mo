@@ -1,0 +1,267 @@
+<section>
+         <!-- Page content-->
+    <div class="content-wrapper">
+       <h3>
+          <!-- Breadcrumb right aligned-->
+          <ol class="breadcrumb pull-right">
+             <li><a href="<?php echo base_url();?>dashboard">Dashboard</a>
+             </li>                  
+             <li class="active">Recharge</li>                 
+          </ol>DTH
+          <!-- Small text for title-->
+           
+          <span class="text-sm hidden-xs">For DTH recharge</span>
+          <?php if($this->session->userdata('my_type') == 1 ){?>
+		   Recharge Amount : <?php echo $amt->REMAININGAMOUNT;?>
+           <?php }?>
+          <!-- Breadcrumb below title-->
+       </h3>
+       <!-- START widgets box-->
+       
+       <div class="row">           
+                <?php if($this->session->flashdata('err') != ''){?>
+                 <div class="alert alert-block alert-danger fade in">
+                     <button data-dismiss="alert" class="close" type="button">
+                       ×
+                     </button>
+                     <p>
+                       <?php echo ($this->session->flashdata('err'))?$this->session->flashdata('err'):''?>
+                     </p>
+                 </div>
+             <br>
+             <?php }?>
+
+             <?php if($this->session->flashdata('msg') != ''){?>
+                 <div class="alert alert-block alert-info fade in no-margin">
+                   <button data-dismiss="alert" class="close" type="button">
+                     ×
+                   </button>
+                   <p>
+                     <?php echo ($this->session->flashdata('msg'))?$this->session->flashdata('msg'):''?>
+                   </p>
+                 </div>
+                 </br>
+             <?php }?>           
+             <br>
+           <div class="col-lg-5">
+                  <!-- START panel tab-->
+                  <div role="tabpanel" class="panel panel-transparent">
+                     <!-- Nav tabs-->
+                     <ul role="tablist" class="nav nav-tabs nav-justified">
+                        <li role="presentation" >
+                           <a href="<?php echo base_url();?>recharge/mobile_recharge"  class="bb0">
+                              <em class="fa fa-mobile-phone fa-fw"></em>Pre Paid</a>
+                        </li>
+                         <li role="presentation " class="active">
+                           <a href="<?php echo base_url();?>recharge/dth_recharge#dth_tab" aria-controls="home" role="tab" data-toggle="tab" class="bb0 ">
+                              <em class="fa fa-rss fa-fw"></em>DTH</a>
+                        </li>
+                        <li role="presentation ">
+                           <a href="<?php echo base_url();?>recharge/post_recharge" class="bb0 ">
+                              <em class="fa fa-mobile-phone fa-fw"></em>Post Paid</a>
+                        </li>
+                       
+                       
+                     </ul>
+                     <!-- Tab panes-->
+                     <div class=" p0 bg-white">                        
+                        <div id="dth_tab" role="tabpanel" class="tab-pane active">
+                           <!-- START table responsive-->
+                           <div class="list-group mb0">
+                               <div class="panel panel-default">
+                                    <div class="panel-heading"></div>
+                                    <div class="panel-body">
+                                        <form method="post"class="form-horizontal" id="recharge-form" >                                          
+                                          <div class="form-group">
+                                             <label class="col-lg-3 control-label">Operator<font class="red">*</font></label>
+                                             <div class="col-lg-9">
+                                                 <select class="select-oprator form-control" name="oprator_name" id="op_name" >
+                                                     <option value="">Select</option>
+                                                     <?php foreach($all_operator as $op){?>
+                                                     <option value="<?php echo $op->op_name;?>" op_code="<?php echo $op->code;?>" <?php echo set_select('oprator_name',$op->op_name);?>><?php echo $op->op_name;?></option>
+                                                     <?php }?>
+                                                 </select>
+                                                 <span class="red"><?=  form_error('oprator_name');?></span>
+                                                 <input type="hidden" name="code" id="code" />
+                                                 <input type="hidden"    name="circle"  value="" >
+                                             </div>
+                                          </div>
+                                          <div class="form-group">
+                                             <label class="col-lg-3 control-label">Number<font class="red">*</font></label>
+                                             <div class="col-lg-9">
+                                                 <input type="mobile" id="num" placeholder="Number" name="mobile" value="<?= set_value("mobile"); ?>" class="form-control" onkeyup="validateR(this, '')" ruleset="[^0-9]" maxlength="12">
+                                                 <span class="red"><?=  form_error('mobile');?></span>
+                                             </div>
+                                          </div>
+                                          <div class="form-group">
+                                              <label class="col-lg-3 control-label">Amount<font class="red">*</font></label>
+                                                <div class="col-lg-9">
+                                                    <input type="text" id="amount" placeholder="Amount" name="amount" value="<?= set_value("amount"); ?>" class="form-control" onkeyup="validateR(this, '')" ruleset="[^0-9]" maxlength="4" >
+                                                    <span class="red"><?=  form_error('oprator_name');?></span>
+                                                </div>
+                                          </div>
+                                          
+                                          <div class="form-group">
+                                             <div class="col-lg-offset-3 col-lg-4">
+                                                 <!--<input type="submit" name="recharge" value="Process To Recharge" class="btn btn-sm btn-info"  />-->
+                                                 <button class="btn btn-labeled btn-success" id="confirm_dth_recharge" type="button">
+                                                    <span class="btn-label">
+                                                    <i class="fa fa-check"></i>
+                                                    </span>
+                                                     Recharge
+                                                    </button>
+                                             </div>
+                                             <div class="col-lg-4">                            
+<!--                                                <button id="get-plans" class="btn btn-labeled btn-info" type="button">
+                                                  <span class="btn-label">
+                                                    <i class="fa fa-check"></i>
+                                                  </span>
+                                                   Get plans
+                                                </button>-->
+                                             </div>
+                                          </div>
+                                       </form>
+                                    </div>
+                                 </div>
+                                 <!-- END panel-->
+                           </div>
+                           <!-- END table responsive-->
+                          
+                        </div>
+                     </div>
+                  </div>
+                  <!-- END panel tab-->
+               </div>
+              <style>
+          @media 
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)  {
+	td:nth-of-type(1):before { content: "S.No."; }
+	td:nth-of-type(2):before { content: "Number"; }
+	td:nth-of-type(3):before { content: "Amount"; }
+	td:nth-of-type(4):before { content: "Operator"; }
+	td:nth-of-type(5):before { content: "Time"; }
+	td:nth-of-type(6):before { content: "Status"; }
+}
+               </style>
+             <div class="col-md-7">                 
+                 <div class="panel-body" style="border:1px solid #ccc;">
+                     <h3> Recharge Details </h3><hr>
+                    <table id="datatable1" class="table table-striped table-hover">
+                       <thead>
+                          <tr>
+                             <th >S.No.</th>
+                             <th >Number</th>
+                             <th >Amount</th>
+                             <th >Operator</th>                             
+                             <th >Time</th>
+                             <!--<th >Done By</th>-->                             
+                             <th >Status</th>                             
+                          </tr>
+                       </thead>
+                       <tbody>
+                           <?php $i=1;foreach($details as $dl){?>
+                           <?php if($dl->recharge_type == 2){?>
+                           <?php if($this->session->userdata('my_type') == 1){?>
+                           
+                                <tr>
+                                    <td><?php echo $i; $i++;?></td>
+                                    <td><?php echo $dl->number;?></td>
+                                    <td><?php echo $dl->amount;?></td>
+                                    <td><?php echo $dl->op_name;?></td>
+                                    <td><?php echo $dl->responce_time;?></td>
+                                    <!--<t  d><?php // echo $dl->first_name;?> (<?php // echo $dl->u_type;?>)</td>-->
+                                    <td>
+                                        <?php if($dl->status == 1){
+                                            echo "Success";
+                                        }else{?>
+                                        <button class="btn btn-primary btn-xs" type="button">Complaint</button>
+
+                                        <?php }?>
+                                    </td>
+                                </tr>
+                           <?php }else if($this->session->userdata('my_type') == 2){?>
+                                <?php if($dl->master_distributor_id == $this->session->userdata('login_id') || $dl->done_by == $this->session->userdata('login_id')){?>
+                                    <tr>
+                                        <td><?php echo $i; $i++;?></td>
+                                        <td><?php echo $dl->number;?></td>
+                                        <td><?php echo $dl->amount;?></td>
+                                        <td><?php echo $dl->op_name;?></td>
+                                        <td><?php echo $dl->responce_time;?></td>
+                                        <td><?php echo $dl->first_name;?> (<?php echo $dl->u_type;?>)</td>
+                                        <td>
+                                            <?php if($dl->status == 1){
+                                                echo "Success";
+                                            }else{?>
+                                            <button class="btn btn-primary btn-xs" type="button">Complaint</button>
+
+                                            <?php }?>
+                                        </td>
+                                    </tr>
+                                <?php }?>
+                           <?php }else if($this->session->userdata('my_type') == 3){?>
+                                <?php if($dl->super_distributor_id == $this->session->userdata('login_id') || $dl->done_by == $this->session->userdata('login_id')){?>
+                                    <tr>
+                                        <td><?php echo $i; $i++;?></td>
+                                        <td><?php echo $dl->number;?></td>
+                                        <td><?php echo $dl->amount;?></td>
+                                        <td><?php echo $dl->op_name;?></td>
+                                        <td><?php echo $dl->responce_time;?></td>
+                                        <td><?php echo $dl->first_name;?> (<?php echo $dl->u_type;?>)</td>
+                                        <td>
+                                            <?php if($dl->status == 1){
+                                                echo "Success";
+                                            }else{?>
+                                            <button class="btn btn-primary btn-xs" type="button">Complaint</button>
+
+                                            <?php }?>
+                                        </td>
+                                    </tr>
+                                <?php }?>
+                           <?php }else if($this->session->userdata('my_type') == 4){?>
+                                <?php if($dl->distributor_id == $this->session->userdata('login_id') || $dl->done_by == $this->session->userdata('login_id')){?>
+                                    <tr>
+                                        <td><?php echo $i; $i++;?></td>
+                                        <td><?php echo $dl->number;?></td>
+                                        <td><?php echo $dl->amount;?></td>
+                                        <td><?php echo $dl->op_name;?></td>
+                                        <td><?php echo $dl->responce_time;?></td>
+                                        <td><?php echo $dl->first_name;?> (<?php echo $dl->u_type;?>)</td>
+                                        <td>
+                                            <?php if($dl->status == 1){
+                                                echo "Success";
+                                            }else{?>
+                                            <button class="btn btn-primary btn-xs" type="button">Complaint</button>
+
+                                            <?php }?>
+                                        </td>
+                                    </tr>
+                                <?php }?>
+                           <?php }else{?>
+                                    <?php if($dl->done_by == $this->session->userdata('login_id')){?>
+                                    <tr>
+                                        <td><?php echo $i; $i++;?></td>
+                                        <td><?php echo $dl->number;?></td>
+                                        <td><?php echo $dl->amount;?></td>
+                                        <td><?php echo $dl->op_name;?></td>
+                                        <td><?php echo $dl->responce_time;?></td>
+                                        <td><?php echo $dl->first_name;?> (<?php echo $dl->u_type;?>)</td>
+                                        <td>
+                                            <?php if($dl->status == 1){
+                                                echo "Success";
+                                            }else{?>
+                                            <button class="btn btn-primary btn-xs" type="button">Complaint</button>
+
+                                            <?php }?>
+                                        </td>
+                                    </tr>
+                                <?php }?>
+                           <?php }?>
+                           <?php }}?>
+                       </tbody>
+                    </table>
+               </div>
+             </div>
+       </div>            
+    </div>
+ </section>
