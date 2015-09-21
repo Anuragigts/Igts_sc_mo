@@ -34,7 +34,7 @@ class Recharge extends CI_Controller {
                $number = $this->input->get('number', TRUE);
                 $ch = curl_init();
                         $optArray = array(
-			CURLOPT_URL => "http://bsms.slabs.mobi/spanelv2/api.php?username=chbhargav9&password=927276&to=$number&from=ESYTOP&message=Incorrect+pattern,+Please+Send+Correct",
+			CURLOPT_URL => "http://bsms.slabs.mobi/spanelv2/api.php?username=chbhargav9&password=927276&to=$number&from=ESYTOP&message=ESY+TOPUP+Incorrect+pattern,+Please+Send+Correct",
 			CURLOPT_RETURNTRANSFER => true
 		);
                         curl_setopt_array($ch, $optArray);
@@ -157,11 +157,11 @@ class Recharge extends CI_Controller {
                $codeval = "";
                $V ="";
                
-                $this->recharge_model->updateOff($req,"Incorrect pattern, Please Send Correct");
+               echo  $this->recharge_model->updateOff($req,"Incorrect pattern, Please Send Correct");
                $number = $this->input->get('number', TRUE);
                 $ch = curl_init();
                         $optArray = array(
-			CURLOPT_URL => "http://bsms.slabs.mobi/spanelv2/api.php?username=chbhargav9&password=927276&to=$number&from=ESYTOP&message=Incorrect+pattern,+Please+Send+Correct",
+			CURLOPT_URL => "http://bsms.slabs.mobi/spanelv2/api.php?username=chbhargav9&password=927276&to=$number&from=ESYTOP&message=ESY+TOPUP+Incorrect+pattern,+Please+Send+Correct",
 			CURLOPT_RETURNTRANSFER => true
 		);
                         curl_setopt_array($ch, $optArray);
@@ -172,8 +172,11 @@ class Recharge extends CI_Controller {
            }
            
         }
-        
+        if($codeval == "AIRTEL"){
+            $result = $this->recharge_model->doairteloff($url['2'],$url['3'],$req,$codeval); 
+        }else{
         $result = $this->recharge_model->doRechargeoff( $recharge_type,$codeval,$V,$url['2'],$url['3'],$req);
+        }
       }
     }
    
@@ -198,23 +201,27 @@ class Recharge extends CI_Controller {
            // $this->form_validation->set_rules('circle','Circle','required');
              if($this->form_validation->run() == TRUE){
                  $recharge_type = 1;
-		$amt = $this->settings_model->checkVirtual();	
+                  $amt = $this->settings_model->checkVirtual();	
                 
                 if($amt >= $this->input->post('amount')){ 
-                    $result = $this->recharge_model->doRecharge( $recharge_type);
-                    //$result = $this->recharge_model->doRecharge1( );
-                    //if($result == 1){                    
-                    if($result == 0){                    
-                        $this->session->set_flashdata('msg','Your Recharge is success full.');  
-                        redirect('recharge/mobile_recharge');
-                    }
-                    else if($result == 2){
-                        $this->session->set_flashdata('err','Recharge fail : Some surver error occurred.');  
-                       redirect('recharge/mobile_recharge');
+                    if($this->input->post('oprator_name') == 'AIRTEL'){
+                        $result = $this->recharge_model->doairtel(); 
                     }else{
-                         $this->session->set_flashdata('err','Recharge fail : Some internal error occurred.');  
-                        redirect('recharge/mobile_recharge');
+                        $result = $this->recharge_model->doRecharge( $recharge_type);
                     }
+                                          
+                        if($result == 0){                    
+                            $this->session->set_flashdata('msg','Your Recharge is success full.');  
+                            redirect('recharge/mobile_recharge');
+                        }
+                        else if($result == 2){
+                            $this->session->set_flashdata('err','Recharge fail : Some surver error occurred.');  
+                           redirect('recharge/mobile_recharge');
+                        }else{
+                             $this->session->set_flashdata('err','Recharge fail : Some internal error occurred.');  
+                            redirect('recharge/mobile_recharge');
+                        }
+                   
                 }else{
                     $this->session->set_flashdata('err','Recharge fail : You are not having sufficient balance amount for recharge.');  
                     redirect('recharge/mobile_recharge');

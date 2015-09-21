@@ -23,8 +23,8 @@
 </head>
 
 <body>
-   <div class="wrapper">
-      <div class="block-center ">
+   <div class="wrapper ">
+      <div class="block-center  mt-xl wd-xl">
         <?php   $this->load->view("layout/success_error");?>
          <!-- START panel-->
          <div class="panel panel-dark panel-flat">

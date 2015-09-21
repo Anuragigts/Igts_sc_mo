@@ -284,7 +284,7 @@ only screen and (max-width: 760px),
                  
                    <div class="panel-body" style="border:1px solid #ccc;">
                      <h3> Recharge Details </h3><hr>
-                    <table id="datatable1" class="table table-striped table-hover ">
+                    <table id="" class="table table-striped table-hover ">
                        <thead>
                           <tr>
                              <th >S.No.</th>

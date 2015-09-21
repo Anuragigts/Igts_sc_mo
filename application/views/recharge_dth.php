@@ -132,22 +132,11 @@
                   </div>
                   <!-- END panel tab-->
                </div>
-              <style>
-          @media 
-only screen and (max-width: 760px),
-(min-device-width: 768px) and (max-device-width: 1024px)  {
-	td:nth-of-type(1):before { content: "S.No."; }
-	td:nth-of-type(2):before { content: "Number"; }
-	td:nth-of-type(3):before { content: "Amount"; }
-	td:nth-of-type(4):before { content: "Operator"; }
-	td:nth-of-type(5):before { content: "Time"; }
-	td:nth-of-type(6):before { content: "Status"; }
-}
-               </style>
-             <div class="col-md-7">                 
-                 <div class="panel-body" style="border:1px solid #ccc;">
+
+             <div class="col-md-7 hidden-xs">                 
+                <div class="panel-body" style="border:1px solid #ccc;">
                      <h3> Recharge Details </h3><hr>
-                    <table id="datatable1" class="table table-striped table-hover">
+                    <table id="" class="table table-striped table-hover ">
                        <thead>
                           <tr>
                              <th >S.No.</th>

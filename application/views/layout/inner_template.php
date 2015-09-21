@@ -62,40 +62,6 @@
 </head>
 
 <body>
-     <!--<a id="swal-demo5" href="" class="btn btn-primary">Try me!</a>-->
-<!--       <button class="btn btn-primary btn-lg" data-toggle="modal" 
-          data-target="#myModal">
-          Launch demo modal
-       </button>
-
-      
-       <div class="modal fade" id="myModal" tabindex="-1" role="dialog" 
-          aria-labelledby="myModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-             <div class="modal-content">
-                <div class="modal-header">
-                   <button type="button" class="close" 
-                      data-dismiss="modal" aria-hidden="true">
-                         &times;
-                   </button>
-                   <h4 class="modal-title" id="myModalLabel">
-                      This Modal title
-                   </h4>
-                </div>
-                <div class="modal-body">
-                   Add some text here
-                </div>
-                <div class="modal-footer">
-                   <button type="button" class="btn btn-default" 
-                      data-dismiss="modal">Close
-                   </button>
-                   <button type="button" class="btn btn-primary">
-                      Submit changes
-                   </button>
-                </div>
-             </div>
-         </div>
-       </div>-->
 
    <div class="wrapper">
       <!-- top navbar-->
@@ -228,29 +194,5 @@ $(".pr_m").change(function () {
     }
 });
 
-//$(window).load(function() {
-//
-//  if ($(this).width() < 500) {
-//
-//    var str = $("<div>");
-//    $("table tr").each(function(){
-//        var ul = $("<ul>");
-//        $("th", this).each(function(){
-//            var li = $("<li>").html(this.innerHTML);
-//            ul.append(li);
-//        });
-//        $("td", this).each(function(){
-//            var li = $("<li>").html(this.innerHTML);
-//            ul.append(li);
-//        });
-//        str.append(ul);
-//    })    
-//    $("table").replaceWith(str); 
-//  } else {
-//    
-//
-//    }
-//
-//});
 
 </script>
